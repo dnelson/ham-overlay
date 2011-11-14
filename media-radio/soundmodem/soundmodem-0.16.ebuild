@@ -16,7 +16,10 @@ IUSE="mmx vis nls"
 
 DEPEND=">=dev-libs/libax25-0.0.7
 	dev-libs/libxml2
-	x11-libs/gtk+:2"
+	x11-libs/gtk+:2
+	>=media-libs/alsa-lib-1.0
+	media-libs/audiofile
+	"
 
 src_compile() {
 	econf \
