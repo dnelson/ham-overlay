@@ -9,7 +9,7 @@ MY_P="${PN}-${MY_PV}"
 
 DESCRIPTION="APRS Digipeater and iGate server"
 HOMEPAGE="http://ham.zmailer.org/oh2mqk/aprx/"
-SRC_URL="http://http://ham.zmailer.org/oh2mqk/aprx/${MY_P}.tar.gz"
+SRC_URL="http://ham.zmailer.org/oh2mqk/aprx/${MY_P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
