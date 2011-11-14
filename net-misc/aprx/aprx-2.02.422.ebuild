@@ -1,8 +1,11 @@
 # Copyright 1999-2011 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
-
 EAPI=4
+inherit versionator
+MY_PV="$(replace_version_seperator 1 'svn')"
+MY_P="${PN}-${MY_PV}"
+
 
 DESCRIPTION="APRS Digipeater and iGate server"
 HOMEPAGE="http://ham.zmailer.org/oh2mqk/aprx/"
