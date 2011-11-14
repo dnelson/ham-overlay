@@ -3,13 +3,13 @@
 # $Header: $
 EAPI=4
 inherit versionator
-MY_PV="$(replace_version_seperator 1 'svn')"
+MY_PV="$(replace_version_separator 2 '.svn')"
 MY_P="${PN}-${MY_PV}"
 
 
 DESCRIPTION="APRS Digipeater and iGate server"
 HOMEPAGE="http://ham.zmailer.org/oh2mqk/aprx/"
-SRC_URL="http://http://ham.zmailer.org/oh2mqk/aprx/${P}.tar.gz"
+SRC_URL="http://http://ham.zmailer.org/oh2mqk/aprx/${MY_P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
