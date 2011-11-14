@@ -16,7 +16,7 @@ IUSE="mmx vis nls"
 
 DEPEND=">=dev-libs/libax25-0.0.7
 	dev-libs/libxml2
-	x11-libs/gtk+:3"
+	x11-libs/gtk+:2"
 
 src_compile() {
 	econf \
