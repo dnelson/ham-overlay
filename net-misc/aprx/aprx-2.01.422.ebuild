@@ -5,24 +5,23 @@ EAPI=4
 inherit versionator eutils autotools
 MY_PV="$(replace_version_separator 2 '.svn')"
 MY_P="${PN}-${MY_PV}"
+S="${WORKDIR}/${MY_P}"
 
-RESTRICT="mirror"
 DESCRIPTION="APRS Digipeater and iGate server"
 HOMEPAGE="http://ham.zmailer.org/oh2mqk/aprx/"
 SRC_URI="http://ham.zmailer.org/oh2mqk/aprx/${MY_P}.tar.gz"
-#ewarn $SRC_URI
 
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~x86 ~x86-linux ~amd64 ~amd64-linux"
-DEPEND="net-libs/libax25"
-RDEPEND="${DEPEND}"
 
 src_configure() {
-	econf $(use_enable) || die "econf failed"
+	econf || die "econf failed"
 }
 
 src_install() {
 	emake DESTDIR="${D}" install || die "emake install failed"
 	dodoc README
+	dodoc TODO
+	dodoc doc/aprx-manual.pdf
 }
