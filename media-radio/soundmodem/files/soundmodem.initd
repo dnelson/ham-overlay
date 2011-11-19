@@ -1,0 +1,42 @@
+#!/sbin/runscript
+# Copyright 1999-2011 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Header: $
+
+#opts="${opts} reload"
+
+depend() {
+	use logger
+}
+
+SOUNDMODEM_CONFDIR=${SOUNDMODEM_CONFDIR:-/etc/}
+SOUNDMODEM_PIDFILE=${SOUNDMODEM_PIDFILE:-/var/run/${SVCNAME}.pid}
+SOUNDMODEM_BINARY=${SOUNDMODEM_BINARY:-/usr/sbin/soundmodem}
+
+start() {
+	ebegin "Starting ${SVCNAME}"
+	start-stop-daemon --start --background --exec "${SOUNDMODEM_BINARY}" \
+	    --make-pidfile --pidfile "${SOUNDMODEM_PIDFILE}" \
+	    -- ${SOUNDMODEM_OPTS}
+	eend $?
+}
+
+stop() {
+	if [ "${RC_CMD}" = "restart" ] ; then
+		checkconfig || return 1
+	fi
+
+	ebegin "Stopping ${SVCNAME}"
+	start-stop-daemon --stop --exec "${SOUNDMODEM_BINARY}" \
+	    --pidfile "${SOUNDMODEM_PIDFILE}" --quiet
+        rm ${SOUNDMODEM_PIDFILE}
+	eend $?
+}
+
+reload() {
+	checkconfig || return 1
+	ebegin "Reloading ${SVCNAME}"
+	start-stop-daemon --stop --signal HUP --oknodo \
+	    --exec "${SOUNDMODEM_BINARY}" --pidfile "${SOUNDMODEM_PIDFILE}"
+	eend $?
+}

@@ -11,7 +11,7 @@ SRC_URI="http://www.baycom.org/~tom/ham/soundmodem/${P}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~x86 ~ppc ~sparc"
-IUSE="mmx vis nls"
+IUSE="mmx vms nls"
 
 
 DEPEND=">=dev-libs/libax25-0.0.7
@@ -20,13 +20,15 @@ DEPEND=">=dev-libs/libax25-0.0.7
 	>=media-libs/alsa-lib-1.0
 	media-libs/audiofile
 	"
-
-src_compile() {
+src_configure() {
 	econf \
 		$(use_enable mmx ) \
 		$(use_enable vms ) \
 		$(use_with nls included-gettext) \
 	|| die "Configure failed!"
+}
+
+src_compile() {
 	if [ -f Makefile ] || [ -f GNUmakefile ] || [ -f makefile ]; then
 		emake || die "emake failed"
 	fi
@@ -38,4 +40,7 @@ src_install() {
 	#newinitd ${FILESDIR}/soundmodem.rc soundmodem
 	#newconfd
 	dodoc ABOUT-NLS AUTHORS COPYING NEWS README
+	doinitd "${FILESDIR}"/soundmodem.initd soundmodem
+	insinto /etc/ax25
+	doins "${FILESDIR}"/soundmodem.conf || die
 }
