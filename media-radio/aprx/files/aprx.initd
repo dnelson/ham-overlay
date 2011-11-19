@@ -1,0 +1,42 @@
+#!/sbin/runscript
+# Copyright 1999-2011 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Header: $
+
+#opts="${opts} reload"
+
+depend() {
+	use logger dns
+	need net
+}
+
+APRX_CONFDIR=${APRX_CONFDIR:-/etc/}
+APRX_PIDFILE=${APRX_PIDFILE:-/var/run/${SVCNAME}.pid}
+APRX_BINARY=${APRX_BINARY:-/sbin/aprx}
+
+start() {
+	ebegin "Starting ${SVCNAME}"
+	start-stop-daemon --start --exec "${APRX_BINARY}" \
+	    --pidfile "${APRX_PIDFILE}" \
+	    -- ${APRX_OPTS}
+	eend $?
+}
+
+stop() {
+	if [ "${RC_CMD}" = "restart" ] ; then
+		checkconfig || return 1
+	fi
+
+	ebegin "Stopping ${SVCNAME}"
+	start-stop-daemon --stop --exec "${APRX_BINARY}" \
+	    --pidfile "${APRX_PIDFILE}" --quiet
+	eend $?
+}
+
+reload() {
+	checkconfig || return 1
+	ebegin "Reloading ${SVCNAME}"
+	start-stop-daemon --stop --signal HUP --oknodo \
+	    --exec "${APRX_BINARY}" --pidfile "${APRX_PIDFILE}"
+	eend $?
+}
