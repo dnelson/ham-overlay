@@ -40,7 +40,7 @@ src_install() {
 	#newinitd ${FILESDIR}/soundmodem.rc soundmodem
 	#newconfd
 	dodoc ABOUT-NLS AUTHORS COPYING NEWS README
-	doinitd "${FILESDIR}"/soundmodem.initd soundmodem
+	newinitd "${FILESDIR}"/soundmodem.initd soundmodem
 	insinto /etc/ax25
 	doins "${FILESDIR}"/soundmodem.conf || die
 }
