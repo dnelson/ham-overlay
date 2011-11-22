@@ -1,1 +1,10 @@
 This is a Gentoo overlay that provides ebuilds for Ham radio programs.
+The easiest way to use this overlay is to add it to layman by inserting 
+"http://www.kj6lvs.com/gentoo/repositories.xml" into /etc/layman/layman.cfg 
+(on the line below "overlays : http://www.gentoo.org/proj/en/overlays/repositories.xml")
+
+Please let me know (or better yet, submit a pull request) if you would like 
+other things in here.
+
+Currently, we have aprx- a powerful but resource-light digipeater/iGate, 
+and soundmodem- a KISS/AX.25 software TNC that uses your soundcard for inputs.
