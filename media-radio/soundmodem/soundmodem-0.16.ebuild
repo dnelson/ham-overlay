@@ -11,7 +11,7 @@ SRC_URI="http://www.baycom.org/~tom/ham/soundmodem/${P}.tar.gz"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~x86 ~ppc ~sparc"
-IUSE="mmx vms nls"
+IUSE="vms nls"
 
 
 DEPEND=">=dev-libs/libax25-0.0.7
@@ -22,7 +22,6 @@ DEPEND=">=dev-libs/libax25-0.0.7
 	"
 src_configure() {
 	econf \
-		$(use_enable mmx ) \
 		$(use_enable vms ) \
 		$(use_with nls included-gettext) \
 	|| die "Configure failed!"
