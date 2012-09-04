@@ -24,6 +24,6 @@ src_install() {
 	dodoc README
 	dodoc TODO
 	dodoc doc/aprx-manual.pdf
-	doinitd "${FILESDIR}"/aprx.initd aprx
+	newinitd "${FILESDIR}"/aprx.initd aprx
 	doins aprx.conf || die
 }
